@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" font-family="'Caveat','Comic Sans MS','Bradley Hand',cursive" font-size="22">
+  <defs>
+    <filter id="rough" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="720">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="4"/>
+      <feDisplacementMap in="SourceGraphic" scale="2.2"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#222"/>
+    </marker>
+  </defs>
+  <style>
+    .stroke { stroke: #222; stroke-width: 2; fill: none; filter: url(#rough); stroke-linecap: round; }
+    .node { fill: #fffdf6; stroke: #222; stroke-width: 2; filter: url(#rough); }
+    .title { font-size: 26px; }
+    .sub { font-size: 17px; fill: #555; }
+    text { fill: #222; }
+  </style>
+
+  <!-- Panel 1: Central decomposer -->
+  <g transform="translate(0,0)">
+    <text x="200" y="40" text-anchor="middle" class="title">Central Decomposer</text>
+    <text x="200" y="62" text-anchor="middle" class="sub">orchestrator → workers</text>
+    <circle cx="200" cy="160" r="38" class="node"/>
+    <text x="200" y="167" text-anchor="middle">O</text>
+    <circle cx="90" cy="280" r="26" class="node"/>
+    <text x="90" y="287" text-anchor="middle">w</text>
+    <circle cx="165" cy="315" r="26" class="node"/>
+    <text x="165" y="322" text-anchor="middle">w</text>
+    <circle cx="240" cy="315" r="26" class="node"/>
+    <text x="240" y="322" text-anchor="middle">w</text>
+    <circle cx="315" cy="280" r="26" class="node"/>
+    <text x="315" y="287" text-anchor="middle">w</text>
+    <line x1="180" y1="195" x2="100" y2="255" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="195" y1="200" x2="167" y2="290" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="210" y1="200" x2="238" y2="290" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="225" y1="195" x2="305" y2="255" class="stroke" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Panel 2: Fixed ordered -->
+  <g transform="translate(400,0)">
+    <text x="200" y="40" text-anchor="middle" class="title">Fixed Ordered</text>
+    <text x="200" y="62" text-anchor="middle" class="sub">deterministic pipeline</text>
+    <rect x="30" y="190" width="68" height="56" class="node" rx="6"/>
+    <text x="64" y="225" text-anchor="middle">A</text>
+    <rect x="124" y="190" width="68" height="56" class="node" rx="6"/>
+    <text x="158" y="225" text-anchor="middle">B</text>
+    <rect x="218" y="190" width="68" height="56" class="node" rx="6"/>
+    <text x="252" y="225" text-anchor="middle">C</text>
+    <rect x="312" y="190" width="68" height="56" class="node" rx="6"/>
+    <text x="346" y="225" text-anchor="middle">D</text>
+    <line x1="98" y1="218" x2="124" y2="218" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="192" y1="218" x2="218" y2="218" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="286" y1="218" x2="312" y2="218" class="stroke" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Panel 3: Swarm (Peer Handoff) -->
+  <g transform="translate(800,0)">
+    <text x="200" y="40" text-anchor="middle" class="title">Swarm (Peer Handoff)</text>
+    <text x="200" y="62" text-anchor="middle" class="sub">non-deterministic · &quot;transfer to X&quot; tool</text>
+    <circle cx="110" cy="160" r="26" class="node"/>
+    <text x="110" y="167" text-anchor="middle">A</text>
+    <circle cx="290" cy="160" r="26" class="node"/>
+    <text x="290" y="167" text-anchor="middle">B</text>
+    <circle cx="290" cy="295" r="26" class="node"/>
+    <text x="290" y="302" text-anchor="middle">C</text>
+    <circle cx="110" cy="295" r="26" class="node"/>
+    <text x="110" y="302" text-anchor="middle">D</text>
+    <!-- A -> B -->
+    <line x1="136" y1="160" x2="264" y2="160" class="stroke" marker-end="url(#arrow)"/>
+    <!-- B -> D (diagonal) -->
+    <line x1="268" y1="178" x2="132" y2="277" class="stroke" marker-end="url(#arrow)"/>
+    <!-- D -> A (left side, up) -->
+    <line x1="110" y1="269" x2="110" y2="186" class="stroke" marker-end="url(#arrow)"/>
+    <!-- A -> C (diagonal) -->
+    <line x1="132" y1="178" x2="268" y2="277" class="stroke" marker-end="url(#arrow)"/>
+    <!-- C -> B (right side, up) -->
+    <line x1="290" y1="269" x2="290" y2="186" class="stroke" marker-end="url(#arrow)"/>
+    <!-- self-loop on B (return-to-self handoff) -->
+    <path d="M309,144 C355,90 240,80 270,142" class="stroke" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Panel 4: Concurrent -->
+  <g transform="translate(0,360)">
+    <text x="200" y="40" text-anchor="middle" class="title">Concurrent</text>
+    <text x="200" y="62" text-anchor="middle" class="sub">fan out · vote / aggregate</text>
+    <circle cx="50" cy="220" r="26" class="node"/>
+    <text x="50" y="227" text-anchor="middle">in</text>
+    <circle cx="200" cy="135" r="26" class="node"/>
+    <text x="200" y="142" text-anchor="middle">w1</text>
+    <circle cx="200" cy="220" r="26" class="node"/>
+    <text x="200" y="227" text-anchor="middle">w2</text>
+    <circle cx="200" cy="305" r="26" class="node"/>
+    <text x="200" y="312" text-anchor="middle">w3</text>
+    <circle cx="350" cy="220" r="28" class="node"/>
+    <text x="350" y="227" text-anchor="middle">∑</text>
+    <line x1="76" y1="215" x2="174" y2="140" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="76" y1="220" x2="174" y2="220" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="76" y1="225" x2="174" y2="300" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="226" y1="140" x2="324" y2="215" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="226" y1="220" x2="322" y2="220" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="226" y1="300" x2="324" y2="225" class="stroke" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Panel 5: Critique loop -->
+  <g transform="translate(400,360)">
+    <text x="200" y="40" text-anchor="middle" class="title">Critique Loop</text>
+    <text x="200" y="62" text-anchor="middle" class="sub">generator ⇄ evaluator</text>
+    <circle cx="120" cy="220" r="40" class="node"/>
+    <text x="120" y="227" text-anchor="middle">gen</text>
+    <circle cx="280" cy="220" r="40" class="node"/>
+    <text x="280" y="227" text-anchor="middle">critic</text>
+    <path d="M158,200 Q200,150 242,200" class="stroke" marker-end="url(#arrow)"/>
+    <path d="M242,240 Q200,295 158,240" class="stroke" marker-end="url(#arrow)"/>
+    <text x="200" y="155" class="sub" text-anchor="middle">draft</text>
+    <text x="200" y="295" class="sub" text-anchor="middle">notes</text>
+  </g>
+
+  <!-- Panel 6: Shared thread -->
+  <g transform="translate(800,360)">
+    <text x="200" y="40" text-anchor="middle" class="title">Shared Thread</text>
+    <text x="200" y="62" text-anchor="middle" class="sub">all read · all write</text>
+    <rect x="120" y="190" width="160" height="60" class="node" rx="8"/>
+    <text x="200" y="225" text-anchor="middle">thread / state</text>
+    <circle cx="55" cy="135" r="24" class="node"/>
+    <text x="55" y="142" text-anchor="middle">A</text>
+    <circle cx="345" cy="135" r="24" class="node"/>
+    <text x="345" y="142" text-anchor="middle">B</text>
+    <circle cx="55" cy="305" r="24" class="node"/>
+    <text x="55" y="312" text-anchor="middle">C</text>
+    <circle cx="345" cy="305" r="24" class="node"/>
+    <text x="345" y="312" text-anchor="middle">D</text>
+    <line x1="78" y1="148" x2="128" y2="195" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="125" y1="200" x2="75" y2="155" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="322" y1="148" x2="272" y2="195" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="275" y1="200" x2="325" y2="155" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="78" y1="290" x2="128" y2="245" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="125" y1="240" x2="75" y2="285" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="322" y1="290" x2="272" y2="245" class="stroke" marker-end="url(#arrow)"/>
+    <line x1="275" y1="240" x2="325" y2="285" class="stroke" marker-end="url(#arrow)"/>
+  </g>
+</svg>
